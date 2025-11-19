@@ -140,7 +140,7 @@ unsigned int stack_size(const hstack_t hstack)
             break;
         }
     }
-    if (!stack) return;
+    if (!stack) return 0;
     int count = 0;
     
     struct StackElement* el = stack->lastElPtr;
