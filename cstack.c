@@ -59,7 +59,7 @@ hstack_t stack_new(void)
     stackArray = new_array;
     stackArray[stackArrayCount] = stack;
 
-    int new_handle = stackArrayCount;
+    int new_handle = overallCount;
     stackArrayCount += 1;
     overallCount += 1;
     return new_handle;
@@ -133,10 +133,17 @@ unsigned int stack_size(const hstack_t hstack)
         // Если такого стека нет, то и количество элементов = 0
         return 0;
     }
-
+    struct Stack* stack = NULL;
+    for (int i = 0; i < stackArrayCount; i++) {
+        if (stackArray[i]->idx == hstack) {
+            stack = stackArray[i];
+            break;
+        }
+    }
+    if (!stack) return;
     int count = 0;
-    struct Stack* currentStack = stackArray[hstack];
-    struct StackElement* el = currentStack->lastElPtr;
+    
+    struct StackElement* el = stack->lastElPtr;
     while (el != NULL) {
         count += 1;
         el = el->prevElement;
