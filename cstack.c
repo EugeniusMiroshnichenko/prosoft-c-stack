@@ -198,7 +198,7 @@ unsigned int stack_pop(const hstack_t hstack, void* data_out, const unsigned int
     if (lastEl == NULL) return 0;
 
     // Если data_out == NULL
-    if (data_out == NULL) {
+    if ((data_out == NULL) || (size != sizeof(lastEl->data))){
         return 0;
     }
 
